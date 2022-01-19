@@ -1,0 +1,5 @@
+{
+    "name": "sudonick",
+    "private": true,
+    "workspaces": ["apps/*"]
+}
