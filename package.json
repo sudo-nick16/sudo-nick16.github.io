@@ -1,5 +1,24 @@
 {
     "name": "sudonick",
     "private": true,
-    "workspaces": ["apps/*"]
+    "workspaces": [
+        "packages/*"
+    ],
+    "scripts": {
+        "web:dev": "yarn workspace @sudonick/web dev",
+        "web:start": "yarn workspace @sudonick/web start",
+        "web:build": "yarn workspace @sudonick/web build",
+        "web:prod": "yarn workspace @sudonick/web prod",
+        "server:start": "yarn workspace @sudonick/server start",
+        "server:build": "yarn workspace @sudonick/server build",
+        "server:watch": "yarn workspace @sudonick/server watch",
+        "server:dev": "yarn workspace @sudonick/server dev",
+        "server:prod": "yarn workspace @sudonick/server prod",
+        "start": "concurrently --kill-others-on-fail \"yarn web:prod\" \"yarn server:prod\"",
+        "dev": "concurrently --kill-others-on-fail \"yarn web:dev\" \"yarn server:watch\" \"yarn server:dev\""
+    },
+    "dependencies": {
+        "concurrently": "^7.0.0",
+        "graphql": "^15.3.0"
+    }
 }
