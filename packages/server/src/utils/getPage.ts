@@ -13,13 +13,17 @@ export const getPage = async (slug: string, notion: Client, pageId: string): Pro
         const postDetails: any = posts.results.filter((post: any) => {
           return slugify(post[post.type].title) === slug;
         })[0];
-  
-        const postId = postDetails.id;
+        
+        if (!postDetails) {
+          return null;
+        }
+
+        const postId = postDetails?.id;
         const postTitle: string = postDetails[postDetails.type].title;
   
         const post: any = await notion.blocks.children.list({ block_id: postId });
   
-        // console.log(JSON.stringify(post.results, null, 1));
+        console.log(JSON.stringify(post.results, null, 1));
   
         const parsedBlocks = notionParse(post.results);
   

@@ -21,15 +21,50 @@ a {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-  font-family: 'M PLUS Rounded 1c', sans-serif;
-  font-family: 'Poppins', sans-serif;
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-family: "Nunito Sans", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+::-webkit-scrollbar-button {
+  display: none;
+}
+::-webkit-scrollbar-corner {
+  display: none;
+}
+::-webkit-scrollbar-thumb {
+  border: 3px solid #202023;
+  border-radius: 99px;
+  background: rgb(126, 126, 126);
+  transition: all 0.3s ease-in-out;
+}
+::-webkit-scrollbar-thumb:hover {
+  /* width: 10px; */
+  /* background: rgb(0, 0, 0); */
+}
+::-webkit-scrollbar-track {
+  width: 14px;
+  background: transparent;
+}
+
+.pink-line {
+  @apply relative after:content-[''] after:absolute after:top-[105%] after:left-0 after:h-[2px] after:w-0 hover:after:w-[105%] after:bg-[#FF5781] after:transition-all after:duration-300;
+}
+
+.gray-line {
+  @apply relative after:content-[''] after:absolute after:top-[102%] after:left-0 after:h-1 after:w-full after:bg-[#525252] after:transition-all after:duration-300;
 }
 
 .nav-item {
-  @apply mx-4 text-pink-0 font-semibold relative after:content-[''] after:absolute after:top-[calc(110%)] after:left-0 after:h-[calc(2px)] after:w-0 hover:after:w-[calc(105%)] after:bg-[#FF5781] after:transition-all after:duration-300;
+  @apply mx-4 text-white font-normal relative after:content-[''] after:absolute after:top-[105%] after:left-0 after:h-[2px] after:w-0 hover:after:w-[105%] after:bg-[#FF5781] after:transition-all after:duration-300;
 }
 
 .after-glow {
-  @apply after:-z-10 after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:transition-opacity after:duration-300 after:opacity-0 after:h-full after:shadow-[0px_0px_60px_0px_#ffffffa6] hover:after:opacity-100;
+  @apply after:-z-10 after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:transition-opacity after:duration-300 after:opacity-0 after:h-full after:shadow-[0px_0px_30px_0px_#81E6D94d] hover:after:opacity-100;
 }

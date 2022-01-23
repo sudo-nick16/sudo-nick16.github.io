@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { request, gql } from "graphql-request";
 import { Block } from "@sudonick/server/src/graphqlTypes";
 import Head from "next/head";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
 type PostsProps = {
   posts: Block[];
@@ -12,27 +12,24 @@ const Posts: NextPage<PostsProps> = ({ posts }) => {
   const router = useRouter();
   return (
     <>
-      <Head><title>Posts</title></Head>
-      <ul className={`flex flex-col w-full justify-center items-center mt-8 list-disc list-outside text-white`}>
-        {posts.map((post, index) => {
+      <Head>
+        <title>Posts</title>
+      </Head>
+      <div className={`flex flex-col text-white w-full mt-8`}>
+        {posts.reverse().map((post, index) => {
           return (
-            <li
-              key={index}
-              className={`list-item text-white w-[69%] my-2 px-4`}
-            >
+            <div className={`flex items-center my-2`}>
+              &#8226;&nbsp;&nbsp;
               <h1
-              onClick={() => router.push(`/posts/${post.slug}`)}
+                onClick={() => router.push(`/posts/${post.slug}`)}
                 className={`font-light w-fit font-poppin text-sm cursor-pointer transition-all duration-200 underline hover:decoration-transparent underline-offset-2`}
               >
                 {post.title}
               </h1>
-              {/* <span className={`text-xs mt-2 opacity-60 ml-auto`}>
-                {getDate(post.last_edited)}
-              </span> */}
-            </li>
+            </div>
           );
         })}
-      </ul>
+      </div>
     </>
   );
 };

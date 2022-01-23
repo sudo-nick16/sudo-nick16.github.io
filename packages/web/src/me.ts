@@ -1,4 +1,4 @@
-export const user = {
+export const me = {
   profile: {
     alias: "sudonick",
     name: "Nikit",
@@ -6,9 +6,10 @@ export const user = {
     github: "https://github.com/sudo-nick16",
     linkedin: "https://www.linkedin.com/in/sudo-nick",
     twitter: "https://twitter.com/voidschizo",
-    instagram: "",
-    about: `I’m a full stack web developer who enjoys building projects that impact people’s lives. My favourite technologies right now are: React.js, Typescript, GraphQl, Node.js and MongoDB.`,
+    instagram: ""
   },
+  about: `Hello, I’m a full stack web developer who enjoys building stuff that impacts people’s lives.`,
+  //  My favourite technologies right now are: React.js, Typescript, GraphQl, Node.js and MongoDB.`,
   projects: [
     {
       name: "Smark",
@@ -43,4 +44,10 @@ export const user = {
       image: "showoff.jpg",
     },
   ],
+  bio: [
+    {
+      time: "2020",
+      description: "started my journey as a web developer",
+    }
+  ]
 };

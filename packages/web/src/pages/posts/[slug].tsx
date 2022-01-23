@@ -1,6 +1,6 @@
 import request, { gql } from "graphql-request";
 import type { NextPage } from "next";
-import Block from "../../components/Block";
+import Block from "../../components/Notion/Block";
 import { getDate } from "../../utils/getDate";
 import { PageResponse } from '@sudonick/server/src/graphqlTypes';
 import Head from "next/head";
@@ -9,9 +9,9 @@ const Post: NextPage<PageResponse> = ({ blocks, title, published }) => {
   return (
     <>
     <Head><title>{title}</title></Head>
-    <div className={`flex flex-col mt-6 mb-12 px-4`}>
+    <div className={`flex flex-col mt-6 mb-12 px-4 w-full mx-auto`}>
       <h1 className={`font-extrabold text-3xl text-white`}>{title}</h1>
-      <p className={`text-sm text-[#bbb] mt-2 ml-1`}>{getDate(published)}</p>
+      <p className={`text-xs text-[#bbb] mt-2 ml-1`}>- {getDate(published)}</p>
       <div className={`my-4 ml-4`}>
         {blocks.map((block) => (
           <Block key={block.id} block={block} />

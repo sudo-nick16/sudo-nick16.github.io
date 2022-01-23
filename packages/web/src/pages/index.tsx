@@ -2,35 +2,32 @@ import { Block } from "@sudonick/server/src/graphqlTypes";
 import request, { gql } from "graphql-request";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Button from "../components/Button";
-import Posts from "../components/Posts";
-import Profile from "../components/Profile";
-import Projects from '../components/Projects';
-import { user } from "../Contants";
+import Button from "../components/Ui/SocialButton";
+import Posts from "../components/Main/Posts";
+import Profile from "../components/Main/Profile";
+import Projects from "../components/Main/Projects";
+import { me } from "../me";
 
 type HomeProps = {
   posts: Block[];
   projects: Block[];
-}
+};
 
 const Home: NextPage<HomeProps> = ({ posts, projects }) => {
-
   return (
     <>
       <Head>
         <title>sudonick</title>
       </Head>
-      <Profile {...user.profile} />
-      <div>
-        <h2 className={`text-pink-0 text-center mt-16 text-xl font-bold`}>
-          About me
-        </h2>
+      <Profile me={me.profile} className={`mt-10`} />
+      <div className={`bg-[#313134] rounded-lg py-2 mt-16`}>
+        {/* <h2 className={`text-white text-center text-[1.3rem] font-semibold mb-4`}>
+          Hello !!
+        </h2> */}
         <p
-          className={`text-white text-center mt-4 w-4/6 mx-auto text-[calc(0.97rem)] leading-[calc(1.8rem)] tracking-wide`}
+          className={`text-white text-center w-5/6 mx-auto text-[calc(0.97rem)] leading-[calc(1.8rem)] tracking-wide`}
         >
-          I’m a full stack web developer who enjoys building projects that
-          impact people’s lives. My favourite technologies right now are:
-          React.js, Typescript, GraphQl, Node.js and MongoDB.
+          {me.about}
         </p>
       </div>
 
@@ -43,9 +40,7 @@ const Home: NextPage<HomeProps> = ({ posts, projects }) => {
           Have an opportunity for me?
         </h2>
         <br />
-        <h2 className={`text-white font-bold text-xl leading-[0rem]`}>
-          OR
-        </h2>
+        <h2 className={`text-white font-bold text-xl leading-[0rem]`}>OR</h2>
         <br />
         <h3 className={`text-white font-semibold text-xl`}>
           Wanna collaborate on a project with me?
@@ -83,7 +78,7 @@ export const getStaticProps = async () => {
   return {
     props: {
       posts: data.posts,
-      projects: data.projects
+      projects: data.projects,
     },
     revalidate: 10,
   };

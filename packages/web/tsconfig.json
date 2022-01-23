@@ -1,4 +1,5 @@
 {
+  "extends": "@sudonick/server/tsconfig.json",
   "compilerOptions": {
     "experimentalDecorators": true,
     "target": "es5",
