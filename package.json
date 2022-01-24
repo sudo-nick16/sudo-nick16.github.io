@@ -5,6 +5,7 @@
         "packages/*"
     ],
     "scripts": {
+        "common:build": "yarn workspace @sudonick/common build",
         "web:dev": "yarn workspace @sudonick/web dev",
         "web:start": "yarn workspace @sudonick/web start",
         "web:build": "yarn workspace @sudonick/web build",

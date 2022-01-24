@@ -19,7 +19,7 @@ const Posts: NextPage<PostsProps> = ({ posts }) => {
       <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 text-white w-full mt-6`}>
         {posts.reverse().map((post) => {
           return (
-            <Post post={post} />
+            <Post key={post.id} post={post} />
           );
         })}
       </div>

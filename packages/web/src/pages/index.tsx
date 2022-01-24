@@ -1,4 +1,4 @@
-import { Block } from "@sudonick/server/src/graphqlTypes";
+import { Block, User } from "@sudonick/server/src/graphqlTypes";
 import request, { gql } from "graphql-request";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -13,21 +13,24 @@ import Socials from "../components/Main/Socials";
 type HomeProps = {
   posts: Block[];
   projects: Block[];
+  nick: User;
 };
 
-const Home: NextPage<HomeProps> = ({ posts, projects }) => {
+const Home: NextPage<HomeProps> = ({ posts, projects, nick }) => {
   return (
     <>
       <Head>
         <title>sudonick</title>
       </Head>
-      <Profile me={me.profile} className={`mt-8`} />
+      <Profile me={me.profile} img={nick?.img} className={`mt-8`} />
 
-      <div className={`bg-[#1e1e20] w-full mx-auto sm:w-full shadow-inner shadow-[#202023] rounded-lg py-2 mt-12`}>
+      <div
+        className={`bg-[#1e1e20] w-full mx-auto sm:w-full shadow-inner shadow-[#202023] rounded-lg py-2 mt-12`}
+      >
         <p
           className={`text-white text-center w-5/6 mx-auto text-[calc(0.97rem)] leading-[calc(1.8rem)] tracking-wide`}
         >
-          {me.about}
+          {nick?.about || me.about}
         </p>
       </div>
 
@@ -38,13 +41,19 @@ const Home: NextPage<HomeProps> = ({ posts, projects }) => {
       <Socials className={`mt-8`} />
 
       <div id="contact" className={`flex flex-col items-center mt-16 mb-14`}>
-        <h2 className={`text-white font-semibold sm:font-bold text-lg sm:text-xl text-center`}>
+        <h2
+          className={`text-white font-semibold sm:font-bold text-lg sm:text-xl text-center`}
+        >
           Have an opportunity for me?
         </h2>
-        <h2 className={`text-white font-normal sm:font-semibold text-lg sm:text-xl leading-[2.5rem] text-center`}>
+        <h2
+          className={`text-white font-normal sm:font-semibold text-lg sm:text-xl leading-[2.5rem] text-center`}
+        >
           OR
         </h2>
-        <h3 className={`text-white font-semibold sm:font-bold text-lg sm:text-xl text-center`}>
+        <h3
+          className={`text-white font-semibold sm:font-bold text-lg sm:text-xl text-center`}
+        >
           Wanna collaborate on a project with me?
         </h3>
         <Button
@@ -73,6 +82,10 @@ export const getStaticProps = async () => {
         slug
         title
       }
+      me {
+        img
+        about
+      }
     }
   `;
 
@@ -82,6 +95,7 @@ export const getStaticProps = async () => {
     props: {
       posts: data.posts || [],
       projects: data.projects || [],
+      nick: data.me,
     },
     revalidate: 10,
   };

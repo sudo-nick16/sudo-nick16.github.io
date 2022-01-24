@@ -90,6 +90,7 @@ const Navbar: NextPage<NavbarProps> = ({}) => {
             className={`nav-box p-2 `}
             href={me.profile.github.url}
             target="_blank"
+            rel="noreferrer"
           >
             Github
           </a>

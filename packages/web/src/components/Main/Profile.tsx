@@ -12,6 +12,7 @@ type Social = {
 }
 
 type ProfileProps = {
+  img: string,
   me: {
     alias: string;
     name: string;
@@ -24,11 +25,11 @@ type ProfileProps = {
   className?: string;
 };
 
-const Profile: NextPage<ProfileProps> = ({ me, className }) => {
+const Profile: NextPage<ProfileProps> = ({ me, className, img }) => {
   return (
     <div className={`flex flex-col items-center sm:flex-row sm:justify-center ${className}`}>
       <img
-        src="sudonick.jpg"
+        src={img || "sudonick.jpg"}
         className={`h-44 w-44 object-cover rounded-full shadow-[#161616] shadow-lg z-10 sm:animate-pfp`}
         alt=""
       />

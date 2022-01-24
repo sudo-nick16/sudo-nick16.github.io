@@ -1,18 +1,37 @@
 import { Arg, Query, Resolver } from "type-graphql";
 import { Client } from "@notionhq/client";
-import { Block, PageResponse } from "../graphqlTypes";
+import { Block, PageResponse, User } from "../graphqlTypes";
 import { getPage } from "../utils/getPage";
 import { getParentPage } from "../utils/getParentPage";
 
-const notion = new Client({ auth: process.env.NOTION_KEY });
-const postsId = process.env.NOTION_POSTS;
-const projectsId = process.env.NOTION_PROJECTS;
+const notion = new Client({ auth: process.env.NOTION_KEY! });
+const postsId = process.env.NOTION_POSTS!;
+const projectsId = process.env.NOTION_PROJECTS!;
+const meId = process.env.NOTION_ME!;
 
 @Resolver()
 export class PostsResolver {
   @Query(() => String)
   async hello() {
     return "Hi!";
+  }
+
+  @Query(() => User, { nullable: true })
+  async me(): Promise<User | null> {
+    try {
+      const user = await getParentPage(notion, meId);
+      const [img, about] = user?.map((u, i) => i < 2 && u.title) as [
+        string,
+        string
+      ];
+      return {
+        img,
+        about
+      };
+    } catch (err) {
+      console.log(err);
+      return null;
+    }
   }
 
   @Query(() => PageResponse, { nullable: true })

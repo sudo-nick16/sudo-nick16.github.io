@@ -59,7 +59,7 @@ const TextBlock: NextPage<TextProps> = ({ text }) => {
           >
             {
               text.link ? (
-                <a href={text.link} target="_blank" className={``}>
+                <a href={text.link} rel="noreferrer" target="_blank" className={``}>
                   {text.content}
                 </a>
               ) : (

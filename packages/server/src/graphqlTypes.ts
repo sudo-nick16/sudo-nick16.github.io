@@ -20,42 +20,42 @@ registerEnumType(Element, {
 @ObjectType()
 export class Annotations {
   @Field(() => Boolean)
-  bold!: boolean;
+  bold: boolean;
   @Field(() => Boolean)
-  italic!: boolean;
+  italic: boolean;
   @Field(() => Boolean)
-  underline!: boolean;
+  underline: boolean;
   @Field(() => Boolean)
-  strikethrough!: boolean;
+  strikethrough: boolean;
   @Field(() => Boolean)
-  code!: boolean;
+  code: boolean;
   @Field(() => String)
-  color!: string;
+  color: string;
 }
 
 
 @ObjectType()
 export class Text {
   @Field(() => String)
-  content!: string;
+  content: string;
   @Field(() => String, { nullable: true })
-  link!: string | null;
+  link: string | null;
   @Field(() => Annotations, { nullable: true })
-  annotations!: Annotations | null;
+  annotations: Annotations | null;
 }
 
 @ObjectType()
 export class Img {
   @Field(() => String)
-  url!: string;
+  url: string;
 }
 
 @ObjectType()
 export class ParsedBlock {
   @Field(() => String)
-  id!: string;
+  id: string;
   @Field(() => Element)
-  element!: Element;
+  element: Element;
   @Field(() => [Text], { nullable: true })
   text?: Text[];
   @Field({ nullable: true })
@@ -67,21 +67,29 @@ export class ParsedBlock {
 @ObjectType()
 export class Block {
   @Field(() => String)
-  id!: string;
+  id: string;
   @Field(() => String)
-  title!: string;
+  title: string;
   @Field(() => String)
-  last_edited!: string;
+  last_edited: string;
   @Field(() => String)
-  slug!: string;
+  slug: string;
 }
 
 @ObjectType()
 export class PageResponse {
   @Field(() => String)
-  title!: string
+  title: string
   @Field(() => [ParsedBlock])
-  blocks!: ParsedBlock[]
+  blocks: ParsedBlock[]
   @Field()
-  published!: string
+  published: string
+}
+
+@ObjectType()
+export class User{
+  @Field()
+  img: string
+  @Field()
+  about: string
 }

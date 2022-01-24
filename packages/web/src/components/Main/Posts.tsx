@@ -24,7 +24,7 @@ const Posts: NextPage<PostsProps> = ({ posts, className }) => {
         {posts.reverse().map((post, index) => {
           if( index < 2){
             return (
-              <Post post={post} className={``} />
+              <Post key={post.id} post={post} className={``} />
             );
           } else {
             return null
