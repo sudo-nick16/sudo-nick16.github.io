@@ -1,6 +1,7 @@
 import { Client } from "@notionhq/client/build/src";
 import { Block } from "../graphqlTypes";
-import { slugify } from "./slugify";
+import { slugify } from "@sudonick/common";
+import { titleParser } from '@sudonick/common';
 
 export const getParentPage = async (notion: Client, pageId: string): Promise<Block[] | null> => {
     try {
@@ -16,7 +17,7 @@ export const getParentPage = async (notion: Client, pageId: string): Promise<Blo
           if(post[post.type].title){
             const meta = {
               title: post[post.type].title,
-              slug: slugify(post[post.type].title),
+              slug: slugify(titleParser(post[post.type].title).title),
               last_edited: post.last_edited_time,
               id: post.id,
             };

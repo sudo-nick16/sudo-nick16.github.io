@@ -1,4 +1,4 @@
-import { Annotations, Element, ParsedBlock, Text } from '../graphqlTypes';
+import { Annotations, Element, ParsedBlock, Text } from "../graphqlTypes";
 
 const blockMap: { [key: string]: Element } = {
   paragraph: Element["p"],
@@ -27,7 +27,7 @@ export const notionParse = (blocks: any): ParsedBlock[] => {
       data.checked = block["to_do"].checked;
     }
     if (block.type !== "image") {
-      const parsedText: Text[]= block[block.type].text.map((text: any) => {
+      const parsedText: Text[] = block[block.type].text.map((text: any) => {
         let content: string = text.plain_text;
         let link: string = text.href;
         let annotations: Annotations = text.annotations;
