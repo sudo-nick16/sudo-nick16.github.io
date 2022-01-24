@@ -6,29 +6,34 @@ import {
 } from "react-icons/ai";
 import { ImLinkedin } from "react-icons/im";
 
+type Social = {
+  url: string
+  username: string;
+}
+
 type ProfileProps = {
   me: {
     alias: string;
     name: string;
     work: string;
-    github: string;
-    linkedin: string;
-    twitter: string;
-    instagram: string;
+    github: Social;
+    linkedin: Social;
+    twitter: Social;
+    instagram: Social;
   };
   className?: string;
 };
 
 const Profile: NextPage<ProfileProps> = ({ me, className }) => {
   return (
-    <div className={`flex mt-14 justify-center ${className}`}>
+    <div className={`flex flex-col items-center sm:flex-row sm:justify-center ${className}`}>
       <img
         src="sudonick.jpg"
-        className={`h-44 w-44 object-cover rounded-full shadow-[0px_0px_10px_0px_#1d1d1d] z-10 animate-pfp`}
+        className={`h-44 w-44 object-cover rounded-full shadow-[#161616] shadow-lg z-10 sm:animate-pfp`}
         alt=""
       />
       <div
-        className={`flex flex-col align-center justify-center ml-12 animate-profileText`}
+        className={`flex flex-col items-center sm:items-start justify-center mt-8 sm:mt-0 sm:ml-12 animate-profileText`}
       >
         <h1
           className={`font-bold text-white text-[1.97rem] leading-normal -mt-2 tracking-wide font-round`}
@@ -41,28 +46,28 @@ const Profile: NextPage<ProfileProps> = ({ me, className }) => {
           {me.work}
         </h2>
         <div className={`flex items-center mt-3`}>
-          {me.github && (
+          {me.github.username && (
             <AiFillGithub
               className={`text-2xl text-white rounded-full mr-1 cursor-pointer`}
-              onClick={() => window.open(me.github, "_blank")}
+              onClick={() => window.open(me.github.url, "_blank")}
             />
           )}
-          {me.linkedin && (
+          {me.linkedin.username && (
             <ImLinkedin
               className={`text-3xl text-white rounded-full p-1 mx-1 cursor-pointer`}
-              onClick={() => window.open(me.linkedin, "_blank")}
+              onClick={() => window.open(me.linkedin.url, "_blank")}
             />
           )}
-          {me.twitter && (
+          {me.twitter.username && (
             <AiFillTwitterCircle
               className={`text-2xl text-white rounded-full mx-1 cursor-pointer`}
-              onClick={() => window.open(me.twitter, "_blank")}
+              onClick={() => window.open(me.twitter.url, "_blank")}
             />
           )}
-          {me.instagram && (
+          {me.instagram.username && (
             <AiFillInstagram
               className={`text-2xl text-white rounded-full mx-1 cursor-pointer`}
-              onClick={() => window.open(me.instagram, "_blank")}
+              onClick={() => window.open(me.instagram.url, "_blank")}
             />
           )}
         </div>

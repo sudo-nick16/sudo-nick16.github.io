@@ -38,15 +38,28 @@ module.exports = {
     'bg-[#594141]',
   ],
   theme: {
+    deliciousHamburgers: {
+      size: '30px', // must be in px.
+      color: '#bebebe',
+      colorLight: '#fff8f4',
+      padding: '0px', // must be in px.
+      animationSpeed: 1,
+    },
     extend: {
+      screens :{
+        'sm': '576px',
+        "xxs": "360px"
+      },
       colors: {
         'pink-0': '#FEECE9',
         'pink-1': '#FF5781',
+        'teal-0': "#81E6D9"
       },
       fontFamily: {
         "sans": ['"Nunito Sans"'],
         "round": ['"M PLUS Rounded 1c"'],
-        "poppin": ['"Poppins"']
+        "poppin": ['"Poppins"'],
+        "mono": ["SFMono-Regular", "Menlo", "Consolas", '"PT Mono"', '"Liberation Mono"', "Courier", "monospace"],
       },
       keyframes: {
         pfp: {
@@ -102,5 +115,5 @@ module.exports = {
       }
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-delicious-hamburgers')],
 }

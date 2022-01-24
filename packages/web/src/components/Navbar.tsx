@@ -3,81 +3,128 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { RiNewspaperFill } from "react-icons/ri";
+import { me } from "../me";
+import { useMediaQuery } from "react-responsive";
 
-type NavbarProps = {
-  // activeItem: string,
-  // setActiveItem: React.Dispatch<React.SetStateAction<string>>
-};
+type NavbarProps = {};
 
 const Navbar: NextPage<NavbarProps> = ({}) => {
+  const mds = useMediaQuery({
+    query: "(max-width: 768px)",
+  });
   const [activeItem, setActiveItem] = useState("");
+  const [nav, setNav] = useState(false);
   const router = useRouter();
+
+  const closeNav = () => {
+    setTimeout(() => {
+      setNav(false);
+    }, 600);
+  };
+
   useEffect(() => {
+    // console.log(router);
     setActiveItem(router.pathname);
   }, [router.pathname]);
 
+  useEffect(() => {
+    if (!mds) {
+      setNav(false);
+    }
+  }, [mds]);
+
   return (
     <div
-      className={`w-full text-pink-50 h-14 py-8 sticky top-0 z-20 filter backdrop-blur-xl`}
+      className={`w-full fixed ${
+        nav ? "h-screen" : "h-16"
+      } tn-5  top-0 z-20 filter backdrop-blur-xl`}
     >
       <div
-        className={`flex justify-between items-center w-full h-full max-w-[768px] mx-auto`}
+        className={`flex flex-col h-full md:flex md:flex-row md:justify-between items-center w-full md:h-full max-w-[768px] mx-auto`}
       >
         <h1
-          className={`text-white ml-2 font-bold text-xl w-fit font-round cursor-pointer pink-line ${
-            activeItem === "/" && "after:w-[105%]"
+          className={`text-white flex items-center ml-2 font-bold text-xl w-fit font-round cursor-pointer fixed top-8 -translate-y-1/2 md:translate-y-0 left-4 md:static ${
+            activeItem === "/" && "glow"
           }`}
-          onClick={() => router.push("/")}
+          onClick={() => {
+            router.push("/");
+            closeNav();
+          }}
         >
+          <img
+            src="/sudonick.svg"
+            alt="sudonick-Nikit"
+            className={`w-8 h-8 mx-2 -mb-1 animate-bounce hover:animate-none`}
+          />
           sudonick
         </h1>
         <div
-        // className={`absolute left-1/2 -translate-x-1/2 h-full flex items-center`}
+          className={`flex-col justify-center h-full ${
+            nav ? "flex" : "h-0 opacity-0"
+          } md:h-full md:flex-row md:opacity-100 overflow-hidden tn md:flex absolute md:left-1/2 md:-translate-x-1/2 h-full flex items-center`}
         >
-          {/* <Link href="/">
-          <a className={`nav-item ${activeItem === "/" && "after:w-[105%]"}`}>
-            Home
-          </a>
-        </Link> */}
           <Link href="/projects">
             <a
-              className={`nav-item ${
-                activeItem === "/projects" && "after:w-[105%]"
+              onClick={closeNav}
+              className={`nav-box p-2 tn ${
+                activeItem === "/projects" && "after:w-full bg-pink-1"
               }`}
             >
               Works
+              {mds && "\u00a0👨‍💻"}
             </a>
           </Link>
           <Link href="/posts">
             <a
-              className={`nav-item ${
-                activeItem === "/posts" && "after:w-[105%]"
+              onClick={closeNav}
+              className={`nav-box p-2 tn ${
+                activeItem === "/posts" && "after:w-full bg-pink-1"
               }`}
             >
               Posts
+              {mds && "\u00a0✍️"}
             </a>
           </Link>
-          <Link href="/#contact">
+          <a
+            onClick={closeNav}
+            className={`nav-box p-2 `}
+            href={me.profile.github.url}
+            target="_blank"
+          >
+            Github
+          </a>
+          {nav && (
             <a
-              className={`nav-item ${
-                activeItem === "/#contact" && "after:w-[105%]"
-              }`}
+              onClick={closeNav}
+              className={`nav-box p-2 `}
+              href="sudonick_resume.pdf"
+              download="sudonick_resume.pdf"
             >
-              Contact
+              Resume 📃
             </a>
-          </Link>
+          )}
         </div>
         <a
           href="sudonick_resume.pdf"
           download="sudonick_resume.pdf"
-          className={`w-min mr-2 relative after-glow`}
+          className={`w-min mr-2 relative after-glow hidden md:block`}
         >
           <abbr title="Download Resume 📃">
-            <RiNewspaperFill
-              className={`w-7 h-7 cursor-pointer text-[#faeedf]`}
-            />
+            <RiNewspaperFill className={`w-7 h-7 cursor-pointer text-white`} />
           </abbr>
         </a>
+        <div
+          onClick={() => setNav(!nav)}
+          className={`block md:hidden fixed top-4 right-4 c-hamburger c-hamburger--collapse p-2 rounded-md ring-pink-1 ring-2 ${
+            nav && "active"
+          }`}
+        >
+          <div className="c-hamburger-inner">
+            <span className="c-hamburger-bar"></span>
+            <span className="c-hamburger-bar"></span>
+            <span className="c-hamburger-bar"></span>
+          </div>
+        </div>
       </div>
     </div>
   );

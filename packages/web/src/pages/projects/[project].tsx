@@ -3,16 +3,19 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { PageResponse } from "@sudonick/server/src/graphqlTypes";
 import Block from "../../components/Notion/Block";
+import { titleParser } from "@sudonick/common";
+import { apiUrl } from "../../constants";
 
 const Project: NextPage<PageResponse> = ({ blocks, title }) => {
+  const projectTitle = titleParser(title).title;
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{projectTitle}</title>
       </Head>
-      <div className={`flex flex-col mt-6 mb-12 px-4 w-full mx-auto`}>
-        <h1 className={`font-extrabold text-3xl text-white text-center`}>{title}</h1>
-        <div className={`my-4 ml-4`}>
+      <div className={`flex flex-col mt-8 mb-12 px-4 w-full mx-auto`}>
+        <h1 className={`font-bold text-3xl text-white text-center`}>{projectTitle}</h1>
+        <div className={`my-4`}>
           {blocks.map((block) => (
             <Block key={block.id} block={block} />
           ))}
@@ -51,16 +54,17 @@ export const getStaticProps = async (context: any) => {
       }
     }
   `;
-  const data = await request("http://localhost:4000/graphql", query, {
+  const data = await request(apiUrl, query, {
     project: context.params.project,
   });
 
-    console.log(JSON.stringify(data.project, null, 1), "prooojjjjj");
+  console.log(JSON.stringify(data, null, 1), "hhhsadbsjdfgcensjugfderbfnds");
+  
 
   return {
     props: {
-      blocks: data.project?.blocks,
-      title: data.project?.title,
+      blocks: data.project?.blocks || [],
+      title: data.project?.title || "",
     },
   };
 };
@@ -73,8 +77,7 @@ export const getStaticPaths = async () => {
       }
     }
   `;
-  const data = await request("http://localhost:4000/graphql", query);
-//   console.log(data);
+  const data = await request(apiUrl, query);
 
   const paths = data.projects.map((project: any) => {
     return {

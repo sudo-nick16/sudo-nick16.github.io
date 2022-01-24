@@ -31,10 +31,11 @@ const colorMap: { [key: string]: string } = {
 const textHandler = (text: string) => {
   let space = "";
   space = "\u2008"; // punctuation space
+  // space choices
   // space = "\u2002"; // en space - bit bigger than punctuation space
   // space = "\u2003"; // en space - a lot bigger than punctuation space
-  // space = "\u0020"; // normal space - shits bed
-  // space = "\u00a0"; // nbsp - shits bed too
+  // space = "\u0020"; // normal space
+  // space = "\u00a0"; // nbsp 
 
   return text.replace(/\s/g, space);
 };
@@ -52,7 +53,9 @@ const TextBlock: NextPage<TextProps> = ({ text }) => {
               colorMap[text.annotations?.color.toLowerCase()!]
             } ${text.annotations?.italic ? "italic" : ""} ${
               text.annotations?.underline ? "underline underline-offset-2" : ""
-            }`}
+            }
+            ${text.annotations?.code? "font-mono bg-[#353C45] text-base leading-tight": ""}
+            `}
           >
             {
               text.link ? (

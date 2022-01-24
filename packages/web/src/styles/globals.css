@@ -8,8 +8,8 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  /* background-color: black; */
-  background-color: #202023;
+    /* background-color: black; */
+    background-color: #202023;
 }
 
 a {
@@ -28,7 +28,23 @@ a {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+*:not(body){
+  /* animation: fadeIn 1s ease-in-out ; */
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(2px);
+    opacity: .7;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 ::-webkit-scrollbar {
+  display: none;
   width: 12px;
   height: 12px;
 }
@@ -54,17 +70,49 @@ a {
 }
 
 .pink-line {
-  @apply relative after:content-[''] after:absolute after:top-[105%] after:left-0 after:h-[2px] after:w-0 hover:after:w-[105%] after:bg-[#FF5781] after:transition-all after:duration-300;
+  @apply relative after:content-[''] after:absolute after:top-full after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF5781] after:transition-all after:duration-300;
 }
 
 .gray-line {
   @apply relative after:content-[''] after:absolute after:top-[102%] after:left-0 after:h-1 after:w-full after:bg-[#525252] after:transition-all after:duration-300;
 }
 
+.pink-static-line {
+  @apply relative after:content-[''] after:absolute after:top-[102%] after:left-0 after:h-1 after:w-full after:bg-pink-1 after:transition-all after:duration-300;
+}
+
 .nav-item {
-  @apply mx-4 text-white font-normal relative after:content-[''] after:absolute after:top-[105%] after:left-0 after:h-[2px] after:w-0 hover:after:w-[105%] after:bg-[#FF5781] after:transition-all after:duration-300;
+  @apply mx-2 cursor-pointer text-white font-normal relative after:content-[''] after:absolute after:top-full after:left-0 after:h-[2px] after:w-0 hover:after:w-full after:bg-[#FF5781] after:transition-all after:duration-300;
+}
+
+.nav-box {
+  @apply mx-2 cursor-pointer focus-within:ring-2 focus-within:ring-pink-1 text-white font-semibold my-2 md:my-0 px-4;
 }
 
 .after-glow {
   @apply after:-z-10 after:content-[''] after:absolute after:top-0 after:left-0 after:w-full after:transition-opacity after:duration-300 after:opacity-0 after:h-full after:shadow-[0px_0px_30px_0px_#81E6D94d] hover:after:opacity-100;
+}
+
+.tn {
+  @apply transition-all duration-300;
+}
+
+.tn-5{
+  @apply transition-all duration-500;
+}
+
+.sn {
+  @apply select-none;
+}
+
+.truncate-2 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.social-text{
+  @apply w-fit flex tn items-center my-1 font-semibold hover:bg-[#2C3839] text-teal-0 cursor-pointer w-fit p-2 px-2 rounded-md;
 }

@@ -1,9 +1,10 @@
 import { Block } from "@sudonick/server/src/graphqlTypes";
-import { slugify } from "@sudonick/server/src/utils/slugify";
+import { slugify, titleParser } from "@sudonick/common";
 import request, { gql } from "graphql-request";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { apiUrl } from "../../constants";
 
 type ProjectPageProps = {
   projects: Block[];
@@ -16,33 +17,33 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ projects }) => {
       <Head>
         <title>Projects</title>
       </Head>
-
-      <div
-        className={`flex flex-col w-full justify-center items-center mt-8 list-disc list-outside text-white`}
-      >
-        <div className={`grid grid-cols-3 gap-4`}>
-          {projects.map((project, index) => {
-            return (
-              <div
-                key={project.id}
-                className={`flex flex-col w-40 items-center`}
+      <div className={`grid grid-cols-1 sm:grid-cols-2 gap-8 text-white mt-8`}>
+        {projects?.map((project) => {
+          const { title, description } = titleParser(project.title);
+          return (
+            <div
+              key={project.id}
+              className={`flex flex-col cursor-pointer w-4/6 sm:w-56 items-center mx-auto rounded-lg p-4 shadow-[#101010] shadow-lg tn hover:scale-[1.05]`}
+              onClick={() => router.push(`/projects/${project.slug}`)}
+            >
+              <img
+                src={`/projects/${slugify(title)}.png`}
+                alt={title}
+                className={`rounded-lg w-24 h-24 p-1 hover:scale-105 transition-all duration-200 object-cover`}
+              />
+              <h1
+                className={`font-semibold sn font-round text-base mt-2 leading-5 transition-all duration-200`}
               >
-                <img
-                  onClick={() => router.push(`/projects/${project.slug}`)}
-                  src={`/projects/${slugify(project.title)}.png`}
-                  alt={project.title}
-                  className={`rounded-2xl w-36 h-36 p-2`}
-                />
-                <h1
-                  onClick={() => router.push(`/projects/${project.slug}`)}
-                  className={`font-semi-bold text-lg cursor-pointer mt-2`}
-                >
-                  {project.title}
-                </h1>
-              </div>
-            );
-          })}
-        </div>
+                {title}
+              </h1>
+              <h2
+                className={`font-regular sn text-[0.94rem] mt-1 text-center leading-6`}
+              >
+                {description}
+              </h2>
+            </div>
+          );
+        })}
       </div>
     </>
   );
@@ -58,12 +59,12 @@ export const getStaticProps = async () => {
       }
     }
   `;
-  const data = await request("http://localhost:4000/graphql", query);
+  const data = await request(apiUrl, query);
   console.log(data);
 
   return {
     props: {
-      projects: data.projects,
+      projects: data.projects || [],
     },
     revalidate: 10,
   };
