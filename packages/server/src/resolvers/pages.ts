@@ -26,7 +26,7 @@ export class PostsResolver {
       ];
       return {
         img,
-        about
+        about,
       };
     } catch (err) {
       console.log(err);
