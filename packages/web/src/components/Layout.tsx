@@ -6,7 +6,9 @@ function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <Navbar />
-      <div className={`max-w-[517px] pt-20 pb-12 mx-auto px-4 sm:px-0 overflow-auto`}>
+      <div
+        className={`max-w-[517px] pt-20 pb-12 mx-auto px-4 sm:px-0 overflow-auto`}
+      >
         <Head>
           <meta name="description" content="Nikit - full stack developer" />
           <link rel="icon" href="/sudonick.png" />

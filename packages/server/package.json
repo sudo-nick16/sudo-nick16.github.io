@@ -26,7 +26,7 @@
     "watch": "tsc -w",
     "start:ts-node": "ts-node src/index.ts",
     "start": "node dist/index.js",
-    "prod": "yarn build && yarn start:prod",
+    "prod": "yarn build && yarn start",
     "dev": "concurrently \"yarn watch\" \"nodemon --exec node dist/index.js\""
   }
 }
