@@ -13,7 +13,7 @@ const Project: NextPage<PageResponse> = ({ blocks, title }) => {
       <Head>
         <title>{projectTitle}</title>
       </Head>
-      <div className={`flex flex-col mt-8 mb-12 px-4 w-full mx-auto`}>
+      <div className={`flex flex-col mt-4 mb-12 px-4 w-full mx-auto`}>
         <h1 className={`font-bold text-3xl text-white text-center`}>{projectTitle}</h1>
         <div className={`my-4`}>
           {blocks.map((block) => (

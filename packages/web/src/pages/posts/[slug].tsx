@@ -11,7 +11,7 @@ const Post: NextPage<PageResponse> = ({ blocks, title, published }) => {
   return (
     <>
     <Head><title>{title}</title></Head>
-    <div className={`flex flex-col mt-6 mb-12 w-full mx-auto`}>
+    <div className={`flex flex-col mt-4 mb-12 w-full mx-auto`}>
       <h1 className={`font-bold text-3xl text-white`}>{title}</h1>
       <p className={`text-xs text-[#bbb] mt-2 ml-1`}>- {getDate(published)}</p>
       <div className={`mt-4 mb-2`}>
