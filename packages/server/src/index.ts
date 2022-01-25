@@ -6,6 +6,8 @@ import express from "express";
 import { PostsResolver } from "./resolvers/pages";
 import cors from "cors";
 
+const PORT = process.env.PORT || 4000;
+
 (async () => {
   const app = express();
   app.use(cors({
@@ -21,7 +23,7 @@ import cors from "cors";
   await server.start();
   server.applyMiddleware({ app, cors: false });
 
-  app.listen(4000, () => {
+  app.listen(PORT, () => {
     console.log("To the moon!");
   });
 })();
