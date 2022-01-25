@@ -27,7 +27,7 @@ const  Post: NextPage<PostProps> = ({post, className}) => {
           />
         ) : null}
         <h1
-          className={`font-light w-full font-poppin text-sm cursor-pointer tn my-4 sm:my-2 text-center px-4 sm:px-2 truncate-2`}
+          className={`font-light w-full font-poppin text-sm cursor-pointer tn my-4 sm:my-2 text-center px-2 sm:px-2 truncate-2`}
         >
           {title}
         </h1>
