@@ -16,7 +16,7 @@
         "server:dev": "yarn workspace @sudonick/server dev",
         "server:watch:dev": "concurrently --kill-others-on-fail \"yarn server:watch\" \"yarn server:dev\"",
         "server:prod": "yarn workspace @sudonick/server prod",
-        "prod": "yarn common:build && concurrently --kill-others-on-fail \"yarn server:prod\" && \"yarn web:prod\"",
+        "prod": "yarn common:build && concurrently --kill-others-on-fail \"yarn server:prod\" \"yarn web:prod\"",
         "dev": "concurrently --kill-others-on-fail \"yarn server:watch\" \"yarn server:dev\" \"yarn web:dev\""
     },
     "dependencies": {

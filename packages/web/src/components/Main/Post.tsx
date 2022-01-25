@@ -23,7 +23,7 @@ const  Post: NextPage<PostProps> = ({post, className}) => {
           <img
             src={description}
             alt={title}
-            className={`rounded-t-lg w-full h-auto object-cover`}
+            className={`rounded-t-lg w-full h-28 object-cover`}
           />
         ) : null}
         <h1
