@@ -1,3 +1,5 @@
 node_modules
 dist
 web
+.git
+docker-compose*.yml

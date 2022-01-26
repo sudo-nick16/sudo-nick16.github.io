@@ -10,12 +10,15 @@ RUN yarn install
 
 COPY ./packages/common/ ./packages/common/
 COPY ./packages/server/ ./packages/server/
+# COPY ./packages/server/.env ./packages/server/.env
 COPY ./packages/server/.env.example ./packages/server/
 
 RUN yarn common:build && yarn server:build
 
 #  stage
 FROM node:alpine as prod
+
+ENV NODE_ENV=production
 
 WORKDIR /sudonick
 
@@ -28,6 +31,7 @@ RUN yarn install --production
 
 COPY --from=builder sudonick/packages/common/dist ./packages/common/dist/
 COPY --from=builder sudonick/packages/server/dist ./packages/server/dist/
+# COPY --from=builder sudonick/packages/server/.env ./packages/server/.env
 COPY --from=builder sudonick/packages/server/.env.example ./packages/server/
 
 CMD ["yarn","server:start"]

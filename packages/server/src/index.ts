@@ -1,4 +1,7 @@
-import "dotenv-safe/config";
+import dotenv from "dotenv-safe";
+dotenv.config({
+  allowEmptyValues: true,
+})
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import "reflect-metadata";
