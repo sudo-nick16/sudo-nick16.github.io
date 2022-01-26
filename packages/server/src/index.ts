@@ -24,6 +24,6 @@ const PORT = process.env.PORT || 4000;
   server.applyMiddleware({ app, cors: false });
 
   app.listen(PORT, () => {
-    console.log("To the moon!");
+    console.log("To the moon! at ", PORT);
   });
 })();

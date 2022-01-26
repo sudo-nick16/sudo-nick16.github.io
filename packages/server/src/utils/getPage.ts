@@ -1,8 +1,7 @@
-import { slugify } from "@sudonick/common";
+import { slugify, titleParser } from "@sudonick/common";
 import { notionParse } from "./notionParse";
 import { PageResponse } from "../graphqlTypes";
 import { Client } from "@notionhq/client/build/src";
-import { titleParser } from "@sudonick/common";
 
 export const getPage = async (
   slug: string,

@@ -1,12 +1,36 @@
-FROM node:alpine
+# building image
+FROM node:alpine as builder
+WORKDIR /sudonick
+COPY ["package.json", "yarn.lock", "./"]
 
-WORKDIR /usr
+COPY ./packages/common/package.json ./packages/common/
+COPY ./packages/server/package.json ./packages/server/
 
-COPY package.json ./
-COPY tsconfig.json ./
+RUN yarn install
 
-COPY src ./src
+COPY ./packages/common/ ./packages/common/
+COPY ./packages/server/ ./packages/server/
+# COPY ./packages/server/.env ./packages/server/.env
+COPY ./packages/server/.env.example ./packages/server/
 
-RUN ls
+RUN yarn common:build && yarn server:build
 
+#  stage
+FROM node:alpine as prod
+
+WORKDIR /sudonick
+
+COPY ["package.json", "yarn.lock", "./"]
+
+COPY ./packages/common/package.json ./packages/common/
+COPY ./packages/server/package.json ./packages/server/
+
+RUN yarn install --production
+
+COPY --from=builder sudonick/packages/common/dist ./packages/common/dist/
+COPY --from=builder sudonick/packages/server/dist ./packages/server/dist/
+COPY --from=builder sudonick/packages/server/.env ./packages/server/.env
+COPY --from=builder sudonick/packages/server/.env.example ./packages/server/
+
+CMD ["yarn","server:start"]
 
