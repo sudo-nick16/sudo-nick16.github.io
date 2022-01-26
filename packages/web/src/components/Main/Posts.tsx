@@ -21,7 +21,7 @@ const Posts: NextPage<PostsProps> = ({ posts, className }) => {
         Posts
       </h1>
       <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 text-white w-full mt-8`}>
-        {posts.reverse().map((post, index) => {
+        {posts.map((post, index) => {
           if( index < 2){
             return (
               <Post key={post.id} post={post} className={``} />

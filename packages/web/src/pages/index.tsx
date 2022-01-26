@@ -93,11 +93,11 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      posts: data.posts || [],
+      posts: data.posts?.reverse() || [],
       projects: data.projects || [],
       nick: data.me,
     },
-    revalidate: 10,
+    revalidate: 60,
   };
 };
 

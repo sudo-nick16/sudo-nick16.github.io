@@ -17,7 +17,7 @@ const Posts: NextPage<PostsProps> = ({ posts }) => {
         <title>Posts</title>
       </Head>
       <div className={`grid grid-cols-1 sm:grid-cols-2 gap-4 text-white w-full mt-6`}>
-        {posts.reverse().map((post) => {
+        {posts.map((post) => {
           return (
             <Post key={post.id} post={post} />
           );
@@ -43,7 +43,7 @@ export const getStaticProps = async () => {
 
   return {
     props: {
-      posts: data.posts || [],
+      posts: data.posts?.reverse() || [],
     },
     revalidate: 10,
   };

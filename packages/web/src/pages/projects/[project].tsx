@@ -58,7 +58,7 @@ export const getStaticProps = async (context: any) => {
     project: context.params.project,
   });
 
-  console.log(JSON.stringify(data, null, 1), "hhhsadbsjdfgcensjugfderbfnds");
+  // console.log(JSON.stringify(data, null, 1), "hhhsadbsjdfgcensjugfderbfnds");
   
 
   return {

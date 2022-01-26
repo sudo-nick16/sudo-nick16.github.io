@@ -60,7 +60,7 @@ export const getStaticProps = async () => {
     }
   `;
   const data = await request(apiUrl, query);
-  console.log(data);
+  // console.log(data);
 
   return {
     props: {

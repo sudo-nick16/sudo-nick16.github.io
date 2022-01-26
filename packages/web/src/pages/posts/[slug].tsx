@@ -57,7 +57,7 @@ export const getStaticProps = async (context: any) => {
     slug: context.params.slug,
   });
 
-  console.log(JSON.stringify(data, null, 1), context.params.slug);
+  // console.log(JSON.stringify(data, null, 1), context.params.slug);
 
   return {
     props: {
@@ -81,7 +81,7 @@ export const getStaticPaths = async () => {
   `;
 
   const data = await request(apiUrl, query);
-  console.log(data);
+  // console.log(data);
 
   const paths = data.posts.map((post: any) => {
     return {
