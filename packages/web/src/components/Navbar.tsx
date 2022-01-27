@@ -23,7 +23,7 @@ const Navbar: NextPage<NavbarProps> = ({}) => {
   };
 
   useEffect(() => {
-    // console.log(router);
+    console.log(router);
     setActiveItem(router.pathname);
   }, [router.pathname]);
 
@@ -98,16 +98,16 @@ const Navbar: NextPage<NavbarProps> = ({}) => {
             <a
               onClick={closeNav}
               className={`nav-box p-2 `}
-              href="sudonick_resume.pdf"
-              download="sudonick_resume.pdf"
+              href="/sudonick_resume.pdf"
+              download
             >
               Resume 📃
             </a>
           )}
         </div>
         <a
-          href="sudonick_resume.pdf"
-          download="sudonick_resume.pdf"
+          href={`/sudonick_resume.pdf`}
+          download
           className={`w-min mr-2 relative after-glow hidden md:block`}
         >
           <abbr title="Download Resume 📃">
