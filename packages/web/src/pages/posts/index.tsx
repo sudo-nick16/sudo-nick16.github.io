@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { request, gql } from "graphql-request";
 import { Block } from "@sudonick/server/src/graphqlTypes";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { apiUrl } from "../../constants";
 import Post from "../../components/Main/Post";
 

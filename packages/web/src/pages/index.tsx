@@ -97,7 +97,7 @@ export const getStaticProps = async () => {
       projects: data.projects || [],
       nick: data.me,
     },
-    revalidate: 60,
+    revalidate: 10,
   };
 };
 

@@ -66,6 +66,7 @@ export const getStaticProps = async (context: any) => {
       blocks: data.project?.blocks || [],
       title: data.project?.title || "",
     },
+    revalidate: 10,
   };
 };
 

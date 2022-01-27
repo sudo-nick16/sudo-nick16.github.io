@@ -65,6 +65,7 @@ export const getStaticProps = async (context: any) => {
       title: titleParser(data.post?.title).title || "",
       published: data.post?.published || "",
     },
+    revalidate: 10,
   };
 };
 
