@@ -1,7 +1,7 @@
 import dotenv from "dotenv-safe";
 dotenv.config({
   allowEmptyValues: true,
-})
+});
 import { ApolloServer } from "apollo-server-express";
 import { buildSchema } from "type-graphql";
 import "reflect-metadata";
@@ -13,9 +13,11 @@ const PORT = process.env.PORT || 4000;
 
 (async () => {
   const app = express();
-  app.use(cors({
-    origin: process.env.ORIGIN,
-  }));
+  app.use(
+    cors({
+      origin: process.env.ORIGIN,
+    })
+  );
 
   const server = new ApolloServer({
     schema: await buildSchema({
