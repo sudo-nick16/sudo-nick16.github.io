@@ -4,8 +4,7 @@ import Block from "../../components/Notion/Block";
 import { getDate } from "../../utils/getDate";
 import { PageResponse } from '@sudonick/server/src/graphqlTypes';
 import Head from "next/head";
-import { apiUrl } from "../../constants";
-import { titleParser } from '@sudonick/common';
+import { API_URL } from "../../constants";
 
 const Post: NextPage<PageResponse> = ({ blocks, title, published }) => {
   return (
@@ -53,7 +52,7 @@ export const getStaticProps = async (context: any) => {
       }
     }
   `;
-  const data = await request(apiUrl, query, {
+  const data = await request(API_URL, query, {
     slug: context.params.slug,
   });
 
@@ -62,7 +61,7 @@ export const getStaticProps = async (context: any) => {
   return {
     props: {
       blocks: data.post?.blocks || [],
-      title: titleParser(data.post?.title).title || "",
+      title: data.post?.title || "", 
       published: data.post?.published || "",
     },
     revalidate: 10,
@@ -81,7 +80,7 @@ export const getStaticPaths = async () => {
     }
   `;
 
-  const data = await request(apiUrl, query);
+  const data = await request(API_URL, query);
   // console.log(data);
 
   const paths = data.posts.map((post: any) => {

@@ -1,11 +1,18 @@
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
-  reactStrictMode: true,
-  distDir: "build",
-  // experimental: {
-  //   externalDir: true,
-  // },
+    reactStrictMode: true,
+    distDir: "build",
+    webpack: (config) => {
+        if (!config.experiments) {
+            config.experiments = {};
+        }
+        config.experiments.topLevelAwait = true;
+        return config;
+    }
+    // experimental: {
+    //   externalDir: true,
+    // },
 }
 
 module.exports = nextConfig

@@ -1,10 +1,9 @@
-import { Block } from "@sudonick/server/src/graphqlTypes";
-import { slugify, titleParser } from "@sudonick/common";
 import request, { gql } from "graphql-request";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { apiUrl } from "../../constants";
+import { API_URL } from "../../constants";
+import { Block } from "../../graphql/graphqlTypes";
 
 type ProjectPageProps = {
   projects: Block[];
@@ -19,7 +18,7 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ projects }) => {
       </Head>
       <div className={`grid grid-cols-1 sm:grid-cols-2 gap-8 text-white mt-8`}>
         {projects?.map((project) => {
-          const { title, description } = titleParser(project.title);
+          const { title, description, img } = project;
           return (
             <div
               key={project.id}
@@ -27,7 +26,7 @@ const ProjectPage: NextPage<ProjectPageProps> = ({ projects }) => {
               onClick={() => router.push(`/projects/${project.slug}`)}
             >
               <img
-                src={`/projects/${slugify(title)}.png`}
+                src={img}
                 alt={title}
                 className={`rounded-lg w-24 h-24 p-1 hover:scale-105 transition-all duration-200 object-cover`}
               />
@@ -54,12 +53,14 @@ export const getStaticProps = async () => {
     {
       projects {
         id
+        description
+        img
         title
         slug
       }
     }
   `;
-  const data = await request(apiUrl, query);
+  const data = await request(API_URL, query);
   // console.log(data);
 
   return {

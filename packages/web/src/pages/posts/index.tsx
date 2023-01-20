@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 import { request, gql } from "graphql-request";
-import { Block } from "@sudonick/server/src/graphqlTypes";
 import Head from "next/head";
-import { apiUrl } from "../../constants";
 import Post from "../../components/Main/Post";
+import { Block } from "../../graphql/graphqlTypes";
+import { API_URL } from "../../constants";
 
 type PostsProps = {
   posts: Block[];
@@ -32,12 +32,13 @@ export const getStaticProps = async () => {
       posts {
         id
         title
+        img
         slug
         last_edited
       }
     }
   `;
-  const data = await request(apiUrl, query);
+  const data = await request(API_URL, query);
   // console.log(data);
 
   return {

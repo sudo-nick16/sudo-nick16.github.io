@@ -3,18 +3,16 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { PageResponse } from "@sudonick/server/src/graphqlTypes";
 import Block from "../../components/Notion/Block";
-import { titleParser } from "@sudonick/common";
-import { apiUrl } from "../../constants";
+import { API_URL } from "../../constants";
 
 const Project: NextPage<PageResponse> = ({ blocks, title }) => {
-  const projectTitle = titleParser(title).title;
   return (
     <>
       <Head>
-        <title>{projectTitle}</title>
+        <title>{title}</title>
       </Head>
       <div className={`flex flex-col mt-4 mb-12 px-4 w-full mx-auto`}>
-        <h1 className={`font-bold text-3xl text-white text-center`}>{projectTitle}</h1>
+        <h1 className={`font-bold text-3xl text-white text-center`}>{title}</h1>
         <div className={`my-4`}>
           {blocks.map((block) => (
             <Block key={block.id} block={block} />
@@ -54,7 +52,7 @@ export const getStaticProps = async (context: any) => {
       }
     }
   `;
-  const data = await request(apiUrl, query, {
+  const data = await request(API_URL, query, {
     project: context.params.project,
   });
 
@@ -78,7 +76,7 @@ export const getStaticPaths = async () => {
       }
     }
   `;
-  const data = await request(apiUrl, query);
+  const data = await request(API_URL, query);
 
   const paths = data.projects.map((project: any) => {
     return {

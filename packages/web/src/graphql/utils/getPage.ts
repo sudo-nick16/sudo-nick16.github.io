@@ -26,7 +26,7 @@ export const getPage = async (
     }
 
     const postId = postDetails?.id;
-    const postTitle: string = postDetails[postDetails.type].title;
+    const postTitle: string = titleParser(postDetails[postDetails.type].title).title;
     const post: any = await notion.blocks.children.list({ block_id: postId });
 
     const parsedBlocks = notionParse(post.results);

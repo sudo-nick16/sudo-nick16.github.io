@@ -1,7 +1,6 @@
-import { titleParser } from "@sudonick/common";
-import { Block } from "@sudonick/server/src/graphqlTypes";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { Block } from "../../graphql/graphqlTypes";
 import MoreInfoButton from "../Ui/MoreInfoButton";
 import Post from "./Post";
 

@@ -1,4 +1,4 @@
-import { Field, ObjectType, registerEnumType } from "type-graphql";
+import { Field, InputType, ObjectType, registerEnumType } from "type-graphql";
 
 export enum Element {
   p = "p",
@@ -21,14 +21,19 @@ registerEnumType(Element, {
 export class Annotations {
   @Field(() => Boolean)
   bold: boolean;
+
   @Field(() => Boolean)
   italic: boolean;
+
   @Field(() => Boolean)
   underline: boolean;
+
   @Field(() => Boolean)
   strikethrough: boolean;
+
   @Field(() => Boolean)
   code: boolean;
+
   @Field(() => String)
   color: string;
 }
@@ -38,8 +43,10 @@ export class Annotations {
 export class Text {
   @Field(() => String)
   content: string;
+
   @Field(() => String, { nullable: true })
   link: string | null;
+
   @Field(() => Annotations, { nullable: true })
   annotations: Annotations | null;
 }
@@ -54,12 +61,16 @@ export class Img {
 export class ParsedBlock {
   @Field(() => String)
   id: string;
+
   @Field(() => Element)
   element: Element;
+
   @Field(() => [Text], { nullable: true })
   text?: Text[];
-  @Field({ nullable: true })
+
+  @Field(() => Boolean, { nullable: true })
   checked?: boolean;
+
   @Field(() => Img, { nullable: true })
   img?: Img;
 }
@@ -68,10 +79,19 @@ export class ParsedBlock {
 export class Block {
   @Field(() => String)
   id: string;
+
   @Field(() => String)
   title: string;
+
+  @Field(() => String, {nullable: true})
+  description?: string;
+
+  @Field(() => String, {nullable: true})
+  img?: string;
+
   @Field(() => String)
   last_edited: string;
+
   @Field(() => String)
   slug: string;
 }
@@ -80,42 +100,52 @@ export class Block {
 export class PageResponse {
   @Field(() => String)
   title: string
+
   @Field(() => [ParsedBlock])
   blocks: ParsedBlock[]
-  @Field()
+
+  @Field(() => String)
   published: string
 }
 
 @ObjectType()
 export class Social{
-  @Field()
+  @Field(() => String)
   username: string
-  @Field()
+
+  @Field(() => String)
   url: string
 }
 
 @ObjectType()
 export class Socials{
-  @Field()
+  @Field(() => Social)
   github: Social
-  @Field()
+
+  @Field(() => Social)
   twitter: Social
-  @Field()
+
+  @Field(() => Social)
   linkedin: Social
 }
 
 @ObjectType()
 export class User{
-  @Field()
+  @Field(() => String)
   name: string
-  @Field()
+
+  @Field(() => String)
   img: string
-  @Field()
+
+  @Field(() => String)
   work: string
-  @Field()
+
+  @Field(() => String)
   about: string
-  @Field()
+
+  @Field(() => String)
   resume: string
-  @Field()
+
+  @Field(() => Socials)
   socials: Socials
 }

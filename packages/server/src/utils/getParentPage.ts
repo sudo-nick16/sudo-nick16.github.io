@@ -6,7 +6,7 @@ import { titleParser } from '@sudonick/common';
 export const getParentPage = async (notion: Client, pageId: string): Promise<Block[] | null> => {
     try {
         const posts = await notion.blocks.children.list({
-          block_id: pageId!,
+          block_id: pageId,
           page_size: 100,
         });
   

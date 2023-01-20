@@ -1,9 +1,8 @@
-import { Block } from "@sudonick/server/src/graphqlTypes";
-import { slugify, titleParser } from "@sudonick/common";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import MoreInfoButton from "../Ui/MoreInfoButton";
 import { useMediaQuery } from 'react-responsive';
+import { Block } from "../../graphql/graphqlTypes";
 
 type ProjectsProps = {
   projects: Block[];
@@ -27,7 +26,6 @@ const Projects: NextPage<ProjectsProps> = ({ projects, className }) => {
       </h1>
       <div className={`mt-8 grid grid-cols-2 sm:grid-cols-3 grid-flow-row gap-10 sm:gap-8 mx-auto sm:mx-0`}>
         {projects.map((project, index) => {
-          const { title } = titleParser(project.title);
           if (index < (sms ? 2 : 3)) {
             return (
               <div
@@ -36,12 +34,12 @@ const Projects: NextPage<ProjectsProps> = ({ projects, className }) => {
                 className={`flex flex-col mx-auto sm:mx-0  max-w-[9rem] sm:w-36 items-center shadow-black shadow-md hover:shadow-inner tn hover:shadow-pink-1 hover:-translate-y-2 pb-2 py-3 rounded-xl cursor-pointer`}
               >
                 <img
-                  src={`/projects/${slugify(title)}.png`}
-                  alt={title}
+                  src={project.img}
+                  alt={project.title}
                   className={`w-[80%] h-auto rounded-lg object-cover`}
                 />
                 <h1 className={`font-medium text-base cursor-pointer mt-2`}>
-                  {title}
+                  {project.title}
                 </h1>
               </div>
             );

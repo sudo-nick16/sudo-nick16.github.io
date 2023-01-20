@@ -20,7 +20,6 @@
         "dev": "concurrently --kill-others-on-fail \"yarn server:watch\" \"yarn server:dev\" \"yarn web:dev\""
     },
     "dependencies": {
-        "concurrently": "^7.0.0",
-        "graphql": "^15.3.0"
+        "concurrently": "^7.0.0"
     }
 }

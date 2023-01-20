@@ -2,6 +2,7 @@
   "name": "@sudonick/web",
   "version": "1.0.0",
   "private": true,
+  "module": "es2022",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -10,15 +11,21 @@
     "prod": "yarn build && yarn start"
   },
   "dependencies": {
+    "@apollo/server": "^4.3.1",
+    "@as-integrations/next": "^1.2.0",
     "@sudonick/common": "^1.0.0",
     "@sudonick/server": "^1.0.0",
+    "graphql": "^15.3.0",
     "graphql-request": "^3.7.0",
     "next": "^12.0.8",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.3.1",
     "react-responsive": "^9.0.0-beta.6",
-    "tailwindcss-delicious-hamburgers": "^1.0.3"
+    "reflect-metadata": "^0.1.13",
+    "tailwindcss-delicious-hamburgers": "^1.0.3",
+    "type-graphql": "^1.1.1",
+    "@notionhq/client": "^0.4.12"
   },
   "devDependencies": {
     "@types/node": "17.0.10",

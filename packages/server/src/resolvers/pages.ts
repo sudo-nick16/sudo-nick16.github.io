@@ -1,6 +1,6 @@
 import { Arg, Query, Resolver } from "type-graphql";
 import { Client } from "@notionhq/client";
-import { Block, PageResponse, User } from "../graphqlTypes";
+import { Block, PageResponse, Socials, User } from "../graphqlTypes";
 import { getPage } from "../utils/getPage";
 import { getParentPage } from "../utils/getParentPage";
 
@@ -20,13 +20,26 @@ export class PostsResolver {
   async me(): Promise<User | null> {
     try {
       const user = await getParentPage(notion, meId);
-      const [img, about] = user?.map((u, i) => i < 2 && u.title) as [
-        string,
-        string
-      ];
+      const [meString, about, resume, socialsString] = user?.map((u, i) => i < 4 && u.title) as string[];
+
+      const [name, work, img] = meString.split(";;");
+
+      const socials = {} as Socials;
+      const sl = socialsString.split(";;");
+      for (let i = 0; i < sl.length-2; i+=3){
+          socials[sl[i+0] as keyof Socials] = {
+              username: sl[i+1],
+              url: sl[i+2],
+          }
+      }
+
       return {
+        name, 
+        work,
         img,
         about,
+        resume, 
+        socials 
       };
     } catch (err) {
       console.log(err);
