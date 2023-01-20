@@ -16,7 +16,6 @@ type ProfileProps = {
 
 const Profile: NextPage<ProfileProps> = ({ name, work, img, className, socials}) => {
     const {github, linkedin, twitter} = socials;
-    console.log(name, work)
     return (
         <div className={`flex flex-col items-center sm:flex-row sm:justify-center ${className}`}>
             <img

@@ -1,10 +1,9 @@
-import request, { gql } from "graphql-request";
 import type { NextPage } from "next";
 import Block from "../../components/Notion/Block";
 import { getDate } from "../../utils/getDate";
 import { PageResponse } from '@sudonick/server/src/graphqlTypes';
 import Head from "next/head";
-import { API_URL } from "../../constants";
+import queryGraphql from "../../graphql/queryGraphql";
 
 const Post: NextPage<PageResponse> = ({ blocks, title, published }) => {
   return (
@@ -25,7 +24,7 @@ const Post: NextPage<PageResponse> = ({ blocks, title, published }) => {
 
 export const getStaticProps = async (context: any) => {
   console.log(context);
-  const query = gql`
+  const query = `
     query Post($slug: String!) {
       post(slug: $slug) {
         blocks {
@@ -52,7 +51,7 @@ export const getStaticProps = async (context: any) => {
       }
     }
   `;
-  const data = await request(API_URL, query, {
+  const data = await queryGraphql (query, {
     slug: context.params.slug,
   });
 
@@ -69,7 +68,7 @@ export const getStaticProps = async (context: any) => {
 };
 
 export const getStaticPaths = async () => {
-  const query = gql`
+  const query = `
     {
       posts {
         id
@@ -80,7 +79,7 @@ export const getStaticPaths = async () => {
     }
   `;
 
-  const data = await request(API_URL, query);
+  const data = await queryGraphql(query);
 
   const paths = data.posts.map((post: any) => {
     return {

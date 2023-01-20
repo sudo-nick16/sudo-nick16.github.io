@@ -8,13 +8,19 @@ const nextConfig = {
             config.experiments = {};
         }
         config.experiments.topLevelAwait = true;
+        // config.resolve.fallback = {
+        //     ...config.resolve.fallback,
+        //     fs: false,
+        // };
+
         return config;
     },
     typescript: {
         ignoreBuildErrors: true,
-      },
+    },
     // experimental: {
-    //   externalDir: true,
+        // externalDir: true,
+        // appDir: true,
     // },
 }
 

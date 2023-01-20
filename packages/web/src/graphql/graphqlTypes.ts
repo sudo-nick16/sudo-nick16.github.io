@@ -1,4 +1,5 @@
-import { Field, InputType, ObjectType, registerEnumType } from "type-graphql";
+import "reflect-metadata";
+import { Field, ObjectType, registerEnumType } from "type-graphql";
 
 export enum Element {
   p = "p",
