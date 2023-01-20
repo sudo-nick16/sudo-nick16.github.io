@@ -1,6 +1,6 @@
 import { Arg, Query, Resolver } from "type-graphql";
 import { Client } from "@notionhq/client";
-import { Block, PageResponse, Socials, User } from "../graphqlTypes";
+import { Block, PageResponse, User } from "../graphqlTypes";
 import { getPage } from "../utils/getPage";
 import { getParentPage } from "../utils/getParentPage";
 import { getUser } from "../utils/getUser";

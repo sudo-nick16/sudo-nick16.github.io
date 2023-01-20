@@ -1,16 +1,44 @@
-import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { RiNewspaperFill } from "react-icons/ri";
 import { useMediaQuery } from "react-responsive";
+import fetchGraphql from "../graphql/fetchGraphql";
 
-export type NavbarProps = {
-    github: string;
-    resume: string;
-};
 
-const Navbar: NextPage<NavbarProps> = ({ github, resume }) => {
+const Navbar = () => {
+    const [data, setData] = useState({
+        github: "",
+        resume: "",
+    })
+
+    useEffect(() => {
+        const fetchNav = async () => {
+            const query = `
+                {
+                    me {
+                        resume
+                        socials{
+                            github{
+                                url
+                            } 
+                        }
+                    }
+                }
+                `;
+            const { me } = await fetchGraphql(query);
+            if (!me) {
+                return;
+            }
+            setData({
+                resume: me?.resume,
+                github: me?.socials?.github?.url,
+            })
+        };
+        fetchNav();
+    }, [])
+
+
     const mds = useMediaQuery({
         query: "(max-width: 768px)",
     });
@@ -21,9 +49,9 @@ const Navbar: NextPage<NavbarProps> = ({ github, resume }) => {
     const closeNav = () => {
         setTimeout(() => {
             setNav(false);
-        }, 600);
+        }, 500);
     };
-     
+
     useEffect(() => {
         setActiveItem(router.pathname);
     }, [router.pathname]);
@@ -84,7 +112,7 @@ const Navbar: NextPage<NavbarProps> = ({ github, resume }) => {
                     <a
                         onClick={closeNav}
                         className={`nav-box p-2 `}
-                        href={github}
+                        href={data.github}
                         target="_blank"
                         rel="noreferrer"
                     >
@@ -94,7 +122,7 @@ const Navbar: NextPage<NavbarProps> = ({ github, resume }) => {
                         <a
                             onClick={closeNav}
                             className={`nav-box p-2 `}
-                            href={resume}
+                            href={data.resume}
                             target="_blank"
                             rel="noreferrer"
                         >
@@ -103,8 +131,9 @@ const Navbar: NextPage<NavbarProps> = ({ github, resume }) => {
                     )}
                 </div>
                 <a
-                    href={resume}
-                    download
+                    href={data.resume}
+                    target="_blank"
+                    rel="noreferrer"
                     className={`w-min mr-2 relative after-glow hidden md:block`}
                 >
                     <abbr title="Resume 📃">

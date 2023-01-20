@@ -94,11 +94,11 @@ a {
 }
 
 .tn {
-  @apply transition-all duration-300;
+  @apply transition-all duration-200;
 }
 
 .tn-5{
-  @apply transition-all duration-500;
+  @apply transition-all duration-300;
 }
 
 .sn {

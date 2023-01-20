@@ -1,11 +1,11 @@
 import Head from "next/head";
 import React from "react";
-import Navbar, { NavbarProps } from "./Navbar";
+import Navbar from "./Navbar";
 
-function Layout({ children, navbarProps }: { children: React.ReactNode, navbarProps: NavbarProps }) {
+function Layout({ children }: { children: React.ReactNode }) {
     return (
         <>
-            <Navbar {...navbarProps}/>
+            <Navbar/>
             <div
                 className={`max-w-[517px] pt-20 pb-12 mx-auto px-4 sm:px-0 overflow-auto`}
             >
