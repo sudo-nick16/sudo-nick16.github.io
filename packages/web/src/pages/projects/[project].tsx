@@ -1,30 +1,29 @@
-import request, { gql } from "graphql-request";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { PageResponse } from "@sudonick/server/src/graphqlTypes";
 import Block from "../../components/Notion/Block";
-import { API_URL } from "../../constants";
+import queryGraphql from "../../graphql/queryGraphql";
 
 const Project: NextPage<PageResponse> = ({ blocks, title }) => {
-  return (
-    <>
-      <Head>
-        <title>{title}</title>
-      </Head>
-      <div className={`flex flex-col mt-4 mb-12 px-4 w-full mx-auto`}>
-        <h1 className={`font-bold text-3xl text-white text-center`}>{title}</h1>
-        <div className={`my-4`}>
-          {blocks.map((block) => (
-            <Block key={block.id} block={block} />
-          ))}
-        </div>
-      </div>
-    </>
-  );
+    return (
+        <>
+            <Head>
+                <title>{title}</title>
+            </Head>
+            <div className={`flex flex-col mt-4 mb-12 px-4 w-full mx-auto`}>
+                <h1 className={`font-bold text-3xl text-white text-center`}>{title}</h1>
+                <div className={`my-4`}>
+                    {blocks.map((block) => (
+                        <Block key={block.id} block={block} />
+                    ))}
+                </div>
+            </div>
+        </>
+    );
 };
 
 export const getStaticProps = async (context: any) => {
-  const query = gql`
+    const query = `
     query Project($project: String!) {
       project(slug: $project) {
         blocks {
@@ -51,41 +50,42 @@ export const getStaticProps = async (context: any) => {
       }
     }
   `;
-  const data = await request(API_URL, query, {
-    project: context.params.project,
-  });
 
-  return {
-    props: {
-      blocks: data.project?.blocks || [],
-      title: data.project?.title || "",
-    },
-    revalidate: 10,
-  };
+    const data = await queryGraphql(query, {
+        project: context.params.project,
+    });
+
+    return {
+        props: {
+            blocks: data.project?.blocks || [],
+            title: data.project?.title || "",
+        },
+        revalidate: 10,
+    };
 };
 
 export const getStaticPaths = async () => {
-  const query = gql`
+    const query = `
     {
       projects {
         slug
       }
     }
   `;
-  const data = await request(API_URL, query);
+    const data = await queryGraphql(query);
 
-  const paths = data.projects.map((project: any) => {
+    const paths = data.projects.map((project: any) => {
+        return {
+            params: {
+                project: project.slug,
+            },
+        };
+    });
+
     return {
-      params: {
-        project: project.slug,
-      },
+        paths,
+        fallback: "blocking",
     };
-  });
-
-  return {
-    paths,
-    fallback: "blocking",
-  };
 };
 
 export default Project;

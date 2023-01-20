@@ -1,4 +1,3 @@
-import request, { gql } from "graphql-request";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Button from "../components/Ui/SocialButton";
@@ -7,7 +6,7 @@ import Profile from "../components/Main/Profile";
 import Projects from "../components/Main/Projects";
 import Socials from "../components/Main/Socials";
 import { Block, User } from "../graphql/graphqlTypes";
-import { API_URL } from "../constants";
+import queryGraphql from "../graphql/queryGraphql";
 
 type HomeProps = {
     posts: Block[];
@@ -68,7 +67,7 @@ const Home: NextPage<HomeProps> = ({ posts, projects, user }) => {
 };
 
 export const getStaticProps = async () => {
-    const query = gql`
+    const query = `
     {
         posts {
             id
@@ -108,7 +107,7 @@ export const getStaticProps = async () => {
     }
     `;
 
-    const data = await request(API_URL, query);
+    const data = await queryGraphql(query);
 
     return {
         props: {

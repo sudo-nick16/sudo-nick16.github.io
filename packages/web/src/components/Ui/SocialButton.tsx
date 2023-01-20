@@ -13,7 +13,6 @@ const Button: NextPage<ButtonProps> = ({
   variant,
   text,
 }) => {
-  console.log(text);
   return (
     <div
       onClick={onClick}

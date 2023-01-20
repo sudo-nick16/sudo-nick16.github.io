@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import { NextPage } from "next";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -23,7 +23,7 @@ const Navbar: NextPage<NavbarProps> = ({ github, resume }) => {
             setNav(false);
         }, 600);
     };
-
+     
     useEffect(() => {
         setActiveItem(router.pathname);
     }, [router.pathname]);
@@ -61,7 +61,7 @@ const Navbar: NextPage<NavbarProps> = ({ github, resume }) => {
                     className={`flex-col justify-center h-full ${nav ? "flex" : "h-0 opacity-0"
                         } md:h-full md:flex-row md:opacity-100 overflow-hidden tn md:flex absolute md:left-1/2 md:-translate-x-1/2 h-full flex items-center`}
                 >
-                    <Link href="/projects">
+                    <Link legacyBehavior href="/projects">
                         <a
                             onClick={closeNav}
                             className={`nav-box p-2 tn ${activeItem === "/projects" && "after:w-full bg-pink-1"
@@ -71,7 +71,7 @@ const Navbar: NextPage<NavbarProps> = ({ github, resume }) => {
                             {mds && "\u00a0👨‍💻"}
                         </a>
                     </Link>
-                    <Link href="/posts">
+                    <Link legacyBehavior href="/posts">
                         <a
                             onClick={closeNav}
                             className={`nav-box p-2 tn ${activeItem === "/posts" && "after:w-full bg-pink-1"
