@@ -13,4 +13,5 @@ const server = new ApolloServer({
     schema,
 });
 
+
 export default startServerAndCreateNextHandler(server);

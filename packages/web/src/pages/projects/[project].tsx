@@ -24,7 +24,6 @@ const Project: NextPage<PageResponse> = ({ blocks, title }) => {
 };
 
 export const getStaticProps = async (context: any) => {
-//   console.log(context);
   const query = gql`
     query Project($project: String!) {
       project(slug: $project) {
@@ -55,9 +54,6 @@ export const getStaticProps = async (context: any) => {
   const data = await request(API_URL, query, {
     project: context.params.project,
   });
-
-  // console.log(JSON.stringify(data, null, 1), "hhhsadbsjdfgcensjugfderbfnds");
-  
 
   return {
     props: {

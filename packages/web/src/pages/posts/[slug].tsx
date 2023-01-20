@@ -81,7 +81,6 @@ export const getStaticPaths = async () => {
   `;
 
   const data = await request(API_URL, query);
-  // console.log(data);
 
   const paths = data.posts.map((post: any) => {
     return {

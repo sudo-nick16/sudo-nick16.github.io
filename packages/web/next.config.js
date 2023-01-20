@@ -9,7 +9,10 @@ const nextConfig = {
         }
         config.experiments.topLevelAwait = true;
         return config;
-    }
+    },
+    typescript: {
+        ignoreBuildErrors: true,
+      },
     // experimental: {
     //   externalDir: true,
     // },

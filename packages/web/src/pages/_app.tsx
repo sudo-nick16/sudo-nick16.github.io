@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps, navbarProps }: WithNavProps) {
     );
 }
 
-MyApp.getInitialProps = async (ctx: any) => {
+MyApp.getInitialProps =  async (ctx: any) => {
     const appProps = await NextApp.getInitialProps(ctx)
     const query = gql`
     {
